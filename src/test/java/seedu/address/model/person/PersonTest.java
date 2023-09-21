@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -16,6 +17,18 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
+
+    @Test
+    public void testInit() {
+        Person person = new PersonBuilder().build();
+        assertNotNull(person);
+    }
+
+    @Test
+    public void testSamePerson() {
+        Person person = new PersonBuilder().build();
+        assertTrue(person.equals(person));
+    }
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
