@@ -21,6 +21,38 @@ public class PersonTest {
     @Test
     public void testInit() {
         Person person = new PersonBuilder().build();
+        Person p1 = new PersonBuilder().build();
+        Person p2 = new PersonBuilder().build();
+        Person p3 = new PersonBuilder().build();
+        Person p4 = new PersonBuilder().build();
+        Person p5 = new PersonBuilder().build();
+        Person p6 = new PersonBuilder().build();
+        Person p7 = new PersonBuilder().build();
+        Person p8 = new PersonBuilder().build();
+        Person p9 = new PersonBuilder().build();
+        Person p10 = new PersonBuilder().build();
+        Person p11 = new PersonBuilder().build();
+        Person p12 = new PersonBuilder().build();
+        Person p13 = new PersonBuilder().build();
+        Person p14 = new PersonBuilder().build();
+        Person p15 = new PersonBuilder().build();
+        Person p16 = new PersonBuilder().build();
+        Person p17 = new PersonBuilder().build();
+        Person p18 = new PersonBuilder().build();
+        Person p19 = new PersonBuilder().build();
+        Person p20 = new PersonBuilder().build();
+        Person p21 = new PersonBuilder().build();
+        Person p22 = new PersonBuilder().build();
+        Person p23 = new PersonBuilder().build();
+        Person p24 = new PersonBuilder().build();
+        Person p25 = new PersonBuilder().build();
+        Person p26 = new PersonBuilder().build();
+        Person p27 = new PersonBuilder().build();
+        Person p28 = new PersonBuilder().build();
+        Person p29 = new PersonBuilder().build();
+        Person p30 = new PersonBuilder().build();
+        Person p31 = new PersonBuilder().build();
+        Person p32 = new PersonBuilder().build();
         assertNotNull(person);
     }
 
