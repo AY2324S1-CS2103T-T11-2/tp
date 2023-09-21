@@ -30,6 +30,9 @@ public class PersonBuilder {
     private Remark remark;
     private Set<Tag> tags;
 
+    /**
+     * Constructs a PersonBuilder instance.
+     */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
@@ -104,5 +107,4 @@ public class PersonBuilder {
     public Person build() {
         return new Person(name, phone, email, address, remark, tags);
     }
-
 }
