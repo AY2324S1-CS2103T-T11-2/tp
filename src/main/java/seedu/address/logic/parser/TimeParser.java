@@ -66,7 +66,7 @@ public class TimeParser {
      * @param time the String that contains the data for the date
      * @return datetime object that represents the string
      */
-    public LocalDateTime parseDate(String time)
+    public static LocalDateTime parseDate(String time)
             throws seedu.address.logic.parser.exceptions.ParseException {
         int currentFormatID = -1;
         for (String formatString : dateFormats) { // find a date format string that matches the user pattern
@@ -95,7 +95,7 @@ public class TimeParser {
      * @param currentFormatID the given type of date object
      * @return a LocalDateTime object that has all the required information
      */
-    private LocalDateTime addMissingDateFields(LocalDateTime temp, int currentFormatID)
+    private static LocalDateTime addMissingDateFields(LocalDateTime temp, int currentFormatID)
             throws seedu.address.logic.parser.exceptions.ParseException {
         switch (currentFormatID) {
         case 0: // case where the current format is a day(index 0)
@@ -120,7 +120,7 @@ public class TimeParser {
         default: // case where the current format is not missing anything(index 1 to 7)
             break; // keep the final date as is
         }
-        // gc: the given date is before today's date even after parsing
+        // guard clause: the given date is before today's date even after parsing
         if (temp.isBefore(LocalDateTime.now())) {
             throw new seedu.address.logic.parser.exceptions.ParseException("Please specify a valid date!");
         }
@@ -134,7 +134,7 @@ public class TimeParser {
      * @param str the string to check
      * @return true if the string is numeric, false otherwise
      */
-    private boolean isNumeric(String str) {
+    private static boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);
             return true;
@@ -151,7 +151,7 @@ public class TimeParser {
      * @param time the LocalDateTime object that represents start dates, or deadlines
      * @return the modified LocalDateTime object
      */
-    private LocalDateTime addYear(LocalDateTime time) {
+    private static LocalDateTime addYear(LocalDateTime time) {
         assert time != null : "time should be not null";
         LocalDateTime now = LocalDateTime.now();
         int yearsElapsed = now.getYear() - DEFAULT_DATE.getYear();
@@ -167,7 +167,7 @@ public class TimeParser {
      * @param time the LocalDateTime object that represents start dates, or deadlines
      * @return the modified LocalDateTime object
      */
-    private LocalDateTime addDay(LocalDateTime time) {
+    private static LocalDateTime addDay(LocalDateTime time) {
         assert time != null : "time should be not null";
         LocalDateTime now = LocalDateTime.now();
         int defaultDay = DEFAULT_DATE.getDayOfWeek().getValue();
@@ -189,7 +189,7 @@ public class TimeParser {
      * @return a new LocalDateTime object, with the same parameters as time, but with hour field
      *         set to 23 and minute field set to 59
      */
-    private LocalDateTime addTime(LocalDateTime time) {
+    private static LocalDateTime addTime(LocalDateTime time) {
         assert time != null : "time should be not null";
         return time.withHour(23).withMinute(59);
     }
@@ -201,7 +201,7 @@ public class TimeParser {
      * @param time the given LocalDateTime object to format
      * @return the string form of the LocalDateTime object
      */
-    public String formatDate(LocalDateTime time) {
+    public static String formatDate(LocalDateTime time) {
         assert time != null : "time should be not null";
         return time.format(DateTimeFormatter.ofPattern("MMM dd yyyy',' H.mma"));
     }

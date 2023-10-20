@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
-import seedu.address.model.person.Person;
 
 /**
  * Container for user visible messages.
@@ -15,10 +15,11 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_INVALID_INTERVIEW_DISPLAYED_INDEX = "The interview index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_INTERVIEWS_LISTED_OVERVIEW = "%1$d interviews listed!";
+    public static final String MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX = "The applicant index provided is invalid";
+    public static final String MESSAGE_APPLICANTS_LISTED_OVERVIEW = "%1$d applicants listed!";
+    public static final String MESSAGE_INVALID_INTERVIEW_DISPLAYED_INDEX =
+            "The interview index provided is invalid";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
@@ -37,17 +38,17 @@ public class Messages {
     /**
      * Formats the {@code person} for display to the user.
      */
-    public static String format(Person person) {
+    public static String formatApplicant(Applicant applicant) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
+        builder.append(applicant.getName())
                 .append("; Phone: ")
-                .append(person.getPhone())
+                .append(applicant.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail())
+                .append(applicant.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress())
+                .append(applicant.getAddress())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        applicant.getTags().forEach(builder::append);
         return builder.toString();
     }
 
@@ -56,7 +57,7 @@ public class Messages {
      */
     public static String formatInterview(Interview interview) {
         return "Applicant: "
-                + interview.getInterviewApplicant()
+                + interview.getInterviewApplicant().getName()
                 + "; Role: "
                 + interview.getJobRole()
                 + "; Scheduled for: "

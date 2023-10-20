@@ -1,13 +1,18 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICANT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMING;
 
+import java.util.List;
+
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
 
 /**
@@ -16,7 +21,7 @@ import seedu.address.model.interview.Interview;
  */
 public class AddInterviewCommand extends Command {
 
-    public static final String COMMAND_WORD = "add-interview";
+    public static final String COMMAND_WORD = "add-i";
 
     /* TODO Update format with intended final format accepted*/
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an interview to the address book. "
@@ -30,28 +35,65 @@ public class AddInterviewCommand extends Command {
             + PREFIX_TIMING + "2023-10-24 18:00";
 
     public static final String MESSAGE_SUCCESS = "New interview added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "Error: This is a duplicate interview";
+    public static final String MESSAGE_DUPLICATE_INTERVIEW = "Error: This is a duplicate interview";
+    public static final String MESSAGE_APPLICANT_HAS_INTERVIEW =
+            "Applicant already has an interview scheduled";
 
-    private final Interview toAdd;
+    private final Index applicantIndex;
+    private final String jobRole;
+    private final String timing;
 
     /**
      * Creates an AddInterviewCommand to add the specified {@code Interview}
      */
-    public AddInterviewCommand(Interview interview) {
-        requireNonNull(interview);
-        toAdd = interview;
+    public AddInterviewCommand(Index applicantIndex, String jobRole, String timing) {
+        requireAllNonNull(applicantIndex, jobRole, timing);
+
+        this.applicantIndex = applicantIndex;
+        this.jobRole = jobRole;
+        this.timing = timing;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Applicant> lastShownList = model.getFilteredApplicantList();
 
-        if (model.hasInterview(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (applicantIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
         }
 
+        Applicant applicant = lastShownList.get(applicantIndex.getZeroBased());
+
+        if (applicant.hasInterview()) {
+            throw new CommandException(MESSAGE_APPLICANT_HAS_INTERVIEW);
+        }
+
+        Applicant applicantWithInterview = new Applicant(
+                applicant.getName(),
+                applicant.getPhone(),
+                applicant.getEmail(),
+                applicant.getAddress(),
+                applicant.getTags(),
+                true
+        );
+
+        Interview toAdd = new Interview(applicantWithInterview, jobRole, timing);
+
+        if (model.hasInterview(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
+        }
+
+        model.setApplicant(applicant, applicantWithInterview);
         model.addInterview(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatInterview(toAdd)));
+    }
+
+    @Override
+    public String toString() {
+        return "AddInterviewCommand{"
+                + "jobRole='" + jobRole + '\''
+                + '}';
     }
 
     @Override
@@ -66,6 +108,8 @@ public class AddInterviewCommand extends Command {
         }
 
         AddInterviewCommand otherAddICommand = (AddInterviewCommand) other;
-        return toAdd.equals(otherAddICommand.toAdd);
+        return applicantIndex.equals(otherAddICommand.applicantIndex)
+                && jobRole.equals(otherAddICommand.jobRole)
+                && timing.equals(otherAddICommand.timing);
     }
 }
