@@ -146,7 +146,7 @@ public class ModelManager implements Model {
     public void deleteInterview(Interview target) {
         addressBook.removeInterview(target);
     }
-  
+
     @Override
     public void setInterview(Interview target, Interview editedInterview) {
         requireAllNonNull(target, editedInterview);
