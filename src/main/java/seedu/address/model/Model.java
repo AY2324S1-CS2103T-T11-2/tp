@@ -5,15 +5,15 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
-import seedu.address.model.person.Person;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Applicant> PREDICATE_SHOW_ALL_APPLICANTS = unused -> true;
     Predicate<Interview> PREDICATE_SHOW_ALL_INTERVIEWS = unused -> true;
 
     /**
@@ -55,40 +55,41 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a applicant with the same identity as {@code applicant} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasApplicant(Applicant applicant);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given applicant.
+     * The applicant must exist in the address book.
      */
-    void deletePerson(Person target);
+    void deleteApplicant(Applicant target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given applicant.
+     * {@code applicant} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void addApplicant(Applicant applicant);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given applicant {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The applicant identity of {@code editedPerson} must not be the same
+     * as another existing applicant in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setApplicant(Applicant target, Applicant editedApplicant);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered applicant list */
+    ObservableList<Applicant> getFilteredApplicantList();
 
     /** Returns an unmodifiable view of the filtered interview list */
     ObservableList<Interview> getFilteredInterviewList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered applicant list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredApplicantList(Predicate<Applicant> predicate);
 
     /**
      * Returns true if an Interview with the same attributes as {@code interview} exists in the address book.
@@ -102,10 +103,19 @@ public interface Model {
     void addInterview(Interview interview);
 
     /**
+<<<<<<< HEAD
      * Deletes the given person.
      * The person must exist in the address book.
      */
     void deleteInterview(Interview target);
+=======
+     * Replaces the given interview {@code target} with {@code editedInterview}.
+     * {@code target} must exist in the address book.
+     * The interview identity of {@code interview} must not be the
+     * same as another existing interview in the address book.
+     */
+    void setInterview(Interview target, Interview editedInterview);
+>>>>>>> master
 
     /**
      * Updates the filter of the filtered interview list to filter by the given {@code predicate}.

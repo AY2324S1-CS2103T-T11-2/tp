@@ -2,26 +2,40 @@ package seedu.address.model.interview;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import seedu.address.model.applicant.Applicant;
+
 /**
  * Represents an Interview in the address book.
  */
 public class Interview {
 
     /** TODO Change from 'String' to 'Applicant' once Applicant is on master*/
-    private String applicant;
-    private String jobRole;
+    private final Applicant applicant;
+    private final String jobRole;
     /** TODO Change from 'String' to proper 'Date/Time' once natural DT is implemented*/
-    private String interviewTiming;
+    private final String interviewTiming;
+    private final boolean isDone;
 
     /**
      * Default constructor for Interview object.
-     * Increments the `globalInterviewId` and uses it as the unique `interviewId` for this instance
      */
-    public Interview(String app, String role, String timing) {
+    public Interview(Applicant app, String role, String timing) {
         requireAllNonNull(app, role, timing);
         applicant = app;
         jobRole = role;
         interviewTiming = timing;
+        isDone = false;
+    }
+
+    /**
+     * Alternative constructor for creating Interview object from storage.
+     */
+    public Interview(Applicant app, String role, String timing, boolean isDone) {
+        requireAllNonNull(app, role, timing, isDone);
+        applicant = app;
+        jobRole = role;
+        interviewTiming = timing;
+        this.isDone = isDone;
     }
 
     /**
@@ -39,7 +53,7 @@ public class Interview {
     }
 
     /* TODO Update return type from String to Applicant */
-    public String getInterviewApplicant() {
+    public Applicant getInterviewApplicant() {
         return applicant;
     }
 
@@ -47,8 +61,13 @@ public class Interview {
         return jobRole;
     }
 
+
     public String getInterviewTiming() {
         return interviewTiming;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     /**
@@ -70,7 +89,7 @@ public class Interview {
         Interview otherInterview = (Interview) other;
         return applicant.equals(otherInterview.applicant)
                 && jobRole.equals(otherInterview.jobRole)
-                && interviewTiming.equals(otherInterview.interviewTiming);
+                && interviewTiming.equals(otherInterview.interviewTiming)
+                && isDone == otherInterview.isDone;
     }
-
 }

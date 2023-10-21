@@ -38,7 +38,8 @@ public class InterviewTest {
     public void equals() {
         // same values -> returns true
         Interview standardInterviewCopy = new Interview(STANDARD_INTERVIEW.getInterviewApplicant(),
-                    STANDARD_INTERVIEW.getJobRole(), STANDARD_INTERVIEW.getInterviewTiming());
+                STANDARD_INTERVIEW.getJobRole(), STANDARD_INTERVIEW.getInterviewTiming(),
+                STANDARD_INTERVIEW.isDone());
         assertTrue(STANDARD_INTERVIEW.equals(standardInterviewCopy));
 
         // same object -> returns true

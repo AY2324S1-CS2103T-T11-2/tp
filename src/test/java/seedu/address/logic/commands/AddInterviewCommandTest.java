@@ -8,6 +8,9 @@ import static seedu.address.testutil.TypicalInterviews.STANDARD_INTERVIEW_2;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.testutil.TypicalIndexes;
+
 /**
  * Tests the AddInterviewCommand class
  * Adapted from AB3 AddCommandTest
@@ -16,19 +19,26 @@ public class AddInterviewCommandTest {
 
     @Test
     public void constructor_nullInterview_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddInterviewCommand(null));
+        assertThrows(NullPointerException.class, () ->
+                new AddInterviewCommand(null, null, null));
     }
 
     @Test
     public void equals() {
-        AddInterviewCommand addInterview1Cmd = new AddInterviewCommand(STANDARD_INTERVIEW);
-        AddInterviewCommand addInterview2Cmd = new AddInterviewCommand(STANDARD_INTERVIEW_2);
+        Index index = TypicalIndexes.INDEX_FIRST;
+        AddInterviewCommand addInterview1Cmd =
+                new AddInterviewCommand(index, STANDARD_INTERVIEW.getJobRole(),
+                        STANDARD_INTERVIEW.getInterviewTiming());
+        AddInterviewCommand addInterview2Cmd =
+                new AddInterviewCommand(index, STANDARD_INTERVIEW_2.getJobRole(),
+                        STANDARD_INTERVIEW_2.getInterviewTiming());
 
         // same object -> returns true
         assertEquals(addInterview1Cmd, addInterview1Cmd);
 
         // same values -> returns true
-        AddInterviewCommand addInterview1Copy = new AddInterviewCommand(STANDARD_INTERVIEW);
+        AddInterviewCommand addInterview1Copy = new AddInterviewCommand(index, STANDARD_INTERVIEW.getJobRole(),
+                STANDARD_INTERVIEW.getInterviewTiming());
         assertEquals(addInterview1Cmd, addInterview1Copy);
 
         // different types -> returns false

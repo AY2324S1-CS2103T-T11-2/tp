@@ -13,7 +13,7 @@ import seedu.address.model.interview.JobContainsKeywordsPredicate;
  */
 public class FindInterviewCommand extends Command {
 
-    public static final String COMMAND_WORD = "find-interview";
+    public static final String COMMAND_WORD = "find-i";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all interviews which the job-role contain any of "
