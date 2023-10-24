@@ -122,13 +122,13 @@
 
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 16px;
+    -fx-font-size: 22pt;
     -fx-text-fill: #010504;
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 13px;
+    -fx-font-size: 16pt;
     -fx-text-fill: #010504;
 }
 
@@ -149,7 +149,7 @@
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 18pt;
+    -fx-font-size: 22pt;
     -fx-text-fill: white;
 }
 
@@ -324,7 +324,7 @@
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 18pt;
+    -fx-font-size: 24pt;
     -fx-text-fill: white;
 }
 
